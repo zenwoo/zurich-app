@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:17.0-alpine
+    container_name: backend-db
+    environment:
+      POSTGRES_PASSWORD: p@ssword
+      POSTGRES_DB: MOTOR_INSURANCE_WEBSITE
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  backend-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend-api
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PASSWORD: p@ssword
+      JWT_SECRET: "CwdKzE4H3rcXd2DM"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+    entrypoint: /usr/src/api/docker-entrypoint.sh
+    command: npm run start:prod
+
+networks:
+  app-network:
+    driver: bridge
