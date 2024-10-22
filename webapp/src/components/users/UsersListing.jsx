@@ -3,7 +3,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { fetchUsers } from './usersSlice';
+import { fetchUsers } from '../../store/user/userThunk';
 import DataTable from '../commons/DataTable';
 import userColumns from './userColumns';
 
@@ -24,7 +24,7 @@ export default function UsersListing() {
 
   return (
     <div className="p-6 rounded shadow-md min-h-svh">
-      <DataTable columns={userColumns} data={users?.data ?? []} />
+      <DataTable columns={userColumns} data={users ?? []} />
     </div>
   );
 }
