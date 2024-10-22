@@ -1,4 +1,4 @@
-import StoreProvider from '../components/StoreProvider';
+import StoreProvider from '../store/StoreProvider';
 import './globals.css';
 
 export const metadata = {
