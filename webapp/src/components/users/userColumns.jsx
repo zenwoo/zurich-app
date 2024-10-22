@@ -37,15 +37,30 @@ const userColumns = [
   },
   {
     accessorKey: 'email',
-    cell: ({ row }) => (
-      <EmailLabel text={row.getValue('email')} />
-    ),
+    cell: ({ row }) => {
+      const id = row.getValue('id');
+      const isEmailHidden = row.getValue('isEmailHidden');
+      const email = row.getValue('email');
+
+      return (
+        <EmailLabel id={id} isEmailHidden={isEmailHidden} text={email} />
+      );
+    },
     header: ({ column }) => (
       <ColumnSort column={column} header="Email" />
     ),
     meta: {
       header: 'Email'
     }
+  },
+  {
+    accessorKey: 'id',
+    header: 'id',
+    enableHiding: true
+  },
+  {
+    accessorKey: 'isEmailHidden',
+    header: 'isEmailHidden'
   }
 ];
 

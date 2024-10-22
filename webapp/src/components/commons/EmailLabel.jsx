@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '../shadcn-ui/button';
@@ -12,25 +12,23 @@ import {
   TooltipTrigger
 } from '../shadcn-ui/tooltip';
 
-import hideEmail from '../../lib/hideEmail';
+import { getUserEmail } from '../../store/user/userThunk';
 
-export default function EmailLabel({ text }) {
-  const [hidden, setHidden] = useState(true);
+export default function EmailLabel({ id, text, isEmailHidden }) {
+  const dispatch = useDispatch();
 
   const handleButtonClick = () => {
-    setHidden((previousValue) => (
-      !previousValue
-    ));
+    dispatch(getUserEmail({ id, isEmailHidden: !isEmailHidden }));
   };
 
   return (
     <div>
       <div className="flex items-center space-x-2">
         <Label>
-          {hidden ? hideEmail(text) : text}
+          {text}
         </Label>
         {
-          hidden ? (
+          !isEmailHidden === true ? (
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>

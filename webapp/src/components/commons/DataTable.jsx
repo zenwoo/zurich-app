@@ -39,7 +39,11 @@ export default function DataTable({
     onSortingChange: setSorting,
     state: {
       columnFilters,
-      sorting
+      sorting,
+      columnVisibility: {
+        id: false,
+        isEmailHidden: false
+      }
     }
   });
 
